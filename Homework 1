@@ -1,1 +1,195 @@
+# Homework 1
 
+# Problem 1
+
+student_id <- c("S01", "S02", "S03", "S04", "S05", "S06")
+section <- c("A", "B", "A", "B", "A", "B")
+quiz1 <- c(82, 91, 76, 88, 95, 69)
+quiz2 <- c(85, 89, 80, 92, 94, 74)
+passed <- c(TRUE, TRUE, TRUE, TRUE, TRUE, FALSE)
+
+# Part A
+section <- factor(section, levels = c("A", "B"))
+
+students <- data.frame(student_id, section, quiz1, quiz2, passed,
+                       stringsAsFactors = FALSE)
+
+score_matrix <- matrix(c(quiz1, quiz2), nrow = 6, ncol = 2,
+                       dimnames = list(student_id, c("quiz1", "quiz2")))
+
+course_record <- list(course = "R Programming",
+                      scores = students,
+                      cutoffs = c(pass = 70, excellent = 90))
+
+typeof(quiz1); class(quiz1); length(quiz1)
+typeof(course_record); class(course_record); length(course_record); str(course_record)
+typeof(score_matrix); class(score_matrix); dim(score_matrix)
+typeof(section); class(section); length(section)
+typeof(students); class(students); dim(students); str(students)
+
+# A vector stores one type of data in a single dimensional sequence, while a list
+# can store different types of data and objects of different lengths.
+# A matrix is similar to a vector, but it is organized into rows and columns
+# and still stores only one type of data.
+# A data frame is like a table made of equal length vectors, where each column
+# can contain a different type of data.
+# A factor is used to represent categories by storing values with labels.
+# Part B
+score_matrix["S04", "quiz2"]
+
+score_matrix[1:2, , drop = FALSE]
+
+course_record["course"]
+course_record[["course"]]
+course_record$course
+
+# [ returns a sub-list, so the result is still wrapped in a list.
+# [[ and $ both pull out the element itself instead of a list. [[ works
+# with a name or a position, $ only works with a name.
+
+# Part C
+students$average <- rowMeans(score_matrix)
+students$excellent <- students$average >= 90
+
+strongA <- students[students$section == "A" & students$average >= 80, ]
+strongA[, c("student_id", "section", "average")]
+
+avgByStudent <- students$average
+names(avgByStudent) <- students$student_id
+avgByStudent
+
+# This is vectorized because rowMeans and the comparisons work on the
+# whole vector/matrix at once instead of looping element by element.
+
+
+# Problem 2
+
+csv_text <- "sample_id,site,temp_c,ph,status
+M01,North,18.2,7.1,ok
+M02,South,20.5,,ok
+M03,North,NA,6.8,review
+M04,East,22.1,7.4,ok
+M05,South,19.7,7.0,review
+M06,East,23.0,NA,ok
+M07,North,17.8,6.9,ok
+M08,South,21.2,7.2,ok"
+
+# Part A
+measurements <- read.csv(text = csv_text, na.strings = c("", "NA"),
+                         stringsAsFactors = FALSE)
+
+head(measurements)
+str(measurements)
+dim(measurements)
+names(measurements)
+
+colSums(is.na(measurements))
+
+measurements_complete <- measurements[complete.cases(measurements), ]
+setdiff(measurements$sample_id, measurements_complete$sample_id)
+
+# x == NA doesn't work because NA means unknown, and comparing anything
+# to an unknown value gives NA instead of TRUE/FALSE. Use is.na(x) instead.
+
+# Part B
+measurements$site <- factor(measurements$site)
+measurements$status <- factor(measurements$status)
+levels(measurements$site)
+levels(measurements$status)
+
+measurements$temp_f <- measurements$temp_c * 9 / 5 + 32
+
+measurements$ph_below_7 <- ifelse(is.na(measurements$ph), NA,
+                                  measurements$ph < 7)
+
+okSites <- measurements[complete.cases(measurements) &
+                          measurements$site %in% c("North", "South") &
+                          measurements$status == "ok", ]
+okSites[, c("sample_id", "site", "temp_c", "temp_f", "ph")]
+
+mean(measurements$temp_c, na.rm = TRUE)
+mean(measurements$temp_c[measurements$site == "South"], na.rm = TRUE)
+
+# Part C
+A <- matrix(1:4, nrow = 2)
+B <- matrix(5:8, nrow = 2)
+
+A * B
+A %*% B
+dim(A * B)
+dim(A %*% B)
+
+# A * B multiplies matching elements one by one and needs the same
+# dimensions. A %*% B does real matrix multiplication (rows times
+# columns) and the number of columns in A has to match the rows in B.
+
+
+# Problem 3
+
+student_id <- paste0("P", sprintf("%02d", 1:8))
+scores <- c(95, 82, NA, 67, 74, 88, 59, 91)
+
+# Part A
+grade_one <- function(score, a_min = 90, b_min = 80, c_min = 70, d_min = 60) {
+  if (is.na(score)) {
+    return(NA_character_)
+  } else if (score >= a_min) {
+    return("A")
+  } else if (score >= b_min) {
+    return("B")
+  } else if (score >= c_min) {
+    return("C")
+  } else if (score >= d_min) {
+    return("D")
+  } else {
+    return("F")
+  }
+}
+
+grade_one(NA)
+grade_one(90)
+grade_one(80)
+grade_one(85)
+grade_one(74)
+
+# Outputs:
+# grade_one(NA) = NA
+# grade_one(90) = A
+# grade_one(80) = B
+# grade_one(85) = B
+# grade_one(74) = C
+
+# Part B
+grades <- rep(NA_character_, length(scores))
+for (i in seq_along(scores)) {
+  grades[i] <- grade_one(scores[i])
+}
+names(grades) <- student_id
+grades
+
+# i is the index of the element in scores being looked at on that pass
+# of the loop.
+
+# Part C-1
+summarize_scores <- function(x, na.rm = TRUE, digits = 1) {
+  c(total = length(x),
+    missing = sum(is.na(x)),
+    mean = round(mean(x, na.rm = na.rm), digits),
+    sd = round(sd(x, na.rm = na.rm), digits),
+    min = round(min(x, na.rm = na.rm), digits),
+    max = round(max(x, na.rm = na.rm), digits))
+}
+
+summarize_scores(scores)
+summarize_scores(x = scores, na.rm = TRUE, digits = 2)
+
+# Part C-2
+plot_scores <- function(x, ...) {
+  plot(seq_along(x), x, ...)
+}
+
+plot_scores(scores, type = "b", pch = 19, xlab = "Position",
+            ylab = "Score", main = "Student Scores")
+
+# The plot connects the 8 scores in order by position, but there should
+# be a break in the line around position 3 since that score is NA.
