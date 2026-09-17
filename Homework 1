@@ -27,8 +27,8 @@ typeof(score_matrix); class(score_matrix); dim(score_matrix)
 typeof(section); class(section); length(section)
 typeof(students); class(students); dim(students); str(students)
 
-# A vector stores one type of data in a single dimensional sequence, while a list can store multiple differnt types of data and objects of different lengths.
-# # A matrix is similar to a vector, but it is organized into rows and columns and can only store 1 data type. A data frame is like a table made of equal length vectors, where each column has the ability to store a differnt type of data.
+# A vector stores one type of data in a single dimensional sequence, while a list can store multiple different types of data and objects of different lengths.
+# # A matrix is similar to a vector, but it is organized into rows and columns and can only store 1 data type. A data frame is like a table made of equal length vectors, where each column has the ability to store a different type of data.
 # A factor is used to represent categories by storing values with labels.
 
 
@@ -86,7 +86,7 @@ colSums(is.na(measurements))
 measurements_complete <- measurements[complete.cases(measurements), ]
 setdiff(measurements$sample_id, measurements_complete$sample_id)
 
-# x == NA dose not work here  because NA means/represents unknown, and comparing anything  to an unknown value gives the result of NA instead of TRUE/FALSE.Instead Use is.na(x) instead.
+# x == NA does not work here  because NA means/represents unknown, and comparing anything  to an unknown value gives the result of NA instead of TRUE/FALSE.Instead Use is.na(x) instead.
 
 # Part B
 measurements$site <- factor(measurements$site)
