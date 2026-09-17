@@ -185,5 +185,4 @@ plot_scores <- function(x, ...) {
 plot_scores(scores, type = "b", pch = 19, xlab = "Position",
             ylab = "Score", main = "Student Scores")
 
-# My prediction is that the plot will connect the scores in order by position,
-# but there will be a break at position 3 because that score is NA.
+# My prediction is that the plot will connect the scores in order by there given position but I feel  there will be a break at position 3 because that score value is NA.
