@@ -27,13 +27,12 @@ typeof(score_matrix); class(score_matrix); dim(score_matrix)
 typeof(section); class(section); length(section)
 typeof(students); class(students); dim(students); str(students)
 
-# A vector stores one type of data in a single dimensional sequence, while a list
-# can store different types of data and objects of different lengths.
-# A matrix is similar to a vector, but it is organized into rows and columns
-# and still stores only one type of data.
-# A data frame is like a table made of equal length vectors, where each column
-# can contain a different type of data.
+# A vector stores one type of data in a single dimensional sequence, while a list can store multiple differnt types of data and objects of different lengths.
+# # A matrix is similar to a vector, but it is organized into rows and columns and can only store 1 data type. A data frame is like a table made of equal length vectors, where each column has the ability to store a differnt type of data.
 # A factor is used to represent categories by storing values with labels.
+
+
+
 # Part B
 score_matrix["S04", "quiz2"]
 
@@ -43,9 +42,9 @@ course_record["course"]
 course_record[["course"]]
 course_record$course
 
-# [ returns a sub-list, so the result is still wrapped in a list.
-# [[ and $ both pull out the element itself instead of a list. [[ works
-# with a name or a position, $ only works with a name.
+# [ returns a sub list, so the result/response is still wrapped in a list.
+# [[ and $ both pull out the element itself instead of a list.
+# [[ works with a name or a position, $ only works with a name.
 
 # Part C
 students$average <- rowMeans(score_matrix)
@@ -58,8 +57,7 @@ avgByStudent <- students$average
 names(avgByStudent) <- students$student_id
 avgByStudent
 
-# This is vectorized because rowMeans and the comparisons work on the
-# whole vector/matrix at once instead of looping element by element.
+# The calculations are vectorized because rowMeans and the comparisons take place on all of the values at once instead of needing to use a loop
 
 
 # Problem 2
@@ -88,8 +86,7 @@ colSums(is.na(measurements))
 measurements_complete <- measurements[complete.cases(measurements), ]
 setdiff(measurements$sample_id, measurements_complete$sample_id)
 
-# x == NA doesn't work because NA means unknown, and comparing anything
-# to an unknown value gives NA instead of TRUE/FALSE. Use is.na(x) instead.
+# x == NA dose not work here  because NA means/represents unknown, and comparing anything  to an unknown value gives the result of NA instead of TRUE/FALSE.Instead Use is.na(x) instead.
 
 # Part B
 measurements$site <- factor(measurements$site)
@@ -119,9 +116,7 @@ A %*% B
 dim(A * B)
 dim(A %*% B)
 
-# A * B multiplies matching elements one by one and needs the same
-# dimensions. A %*% B does real matrix multiplication (rows times
-# columns) and the number of columns in A has to match the rows in B.
+# A * B multiplies matching elements in the two matrices.  A %*% B uses rows and columns to perform matrix multiplication.
 
 
 # Problem 3
@@ -167,8 +162,7 @@ for (i in seq_along(scores)) {
 names(grades) <- student_id
 grades
 
-# i is the index of the element in scores being looked at on that pass
-# of the loop.
+# i is the index of the element in scores being looked at .
 
 # Part C-1
 summarize_scores <- function(x, na.rm = TRUE, digits = 1) {
@@ -191,5 +185,5 @@ plot_scores <- function(x, ...) {
 plot_scores(scores, type = "b", pch = 19, xlab = "Position",
             ylab = "Score", main = "Student Scores")
 
-# The plot connects the 8 scores in order by position, but there should
-# be a break in the line around position 3 since that score is NA.
+# My prediction is that the plot will connect the scores in order by position,
+# but there will be a break at position 3 because that score is NA.
