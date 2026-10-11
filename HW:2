@@ -371,8 +371,8 @@ customers_only
 
 #Part C
 
-# Note: the homework does not define customers_bad. For this check I created
-# it by adding a second C2 record with a different region to customers.
+# Note: I dont think customers_bad was ever defined. SO i used ai to make it if thats okay.
+
 
 customers_bad <- bind_rows(
   customers,
