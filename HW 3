@@ -2,17 +2,7 @@
 # STAT 184 - Homework 3: Reproducing plots and exploring real spatial data
 # Problems 1A-1C, 2, and 3
 # Due: November 1, 2026
-#
-# HOW TO RUN
-# 1. Open this file in RStudio and set the working directory to your HW3 folder.
-# 2. Run once to install any missing packages (in the Console):
-#    install.packages(c("ggplot2", "dplyr", "tidyr", "readr", "sf", "jsonlite"))
-# 3. Source the whole script. It downloads original Chicago open data on the
-#    first run and saves plots, summary CSV files, and GIS files in HW3_outputs/.
-# 4. Upload HW3.R and include your own GitHub repository link in the submission.
-#
-# NOTE: Some results depend on the City of Chicago data at the time of download.
-#       Data are NOT fabricated. Site counts are calculated, never hard-coded.
+
 # ===========================================================================
 
 library(ggplot2)
