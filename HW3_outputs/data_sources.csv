@@ -1,0 +1,3 @@
+data_type,dataset_name,publisher,source_page,download_url,retrieved_on,raw_format,access_and_license
+Point facilities,"Libraries - Locations, Contact Information, and Usual Hours of Operation",City of Chicago / Chicago Public Library,https://data.cityofchicago.org/d/x8fc-8rcq,https://data.cityofchicago.org/resource/x8fc-8rcq.json,2026-10-31,JSON (all pages),Public portal; see City of Chicago Terms of Use
+Area polygons,Boundaries - Community Areas,City of Chicago,https://data.cityofchicago.org/d/igwz-8jzy,https://data.cityofchicago.org/api/geospatial/igwz-8jzy?method=export&format=GeoJSON,2026-10-31,GeoJSON,Public portal; see City of Chicago Terms of Use

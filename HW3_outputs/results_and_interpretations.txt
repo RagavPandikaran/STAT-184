@@ -1,0 +1,23 @@
+HOMEWORK 3 - RESULTS AND INTERPRETATIONS
+
+Problem 1A: Faceting by drv fits a separate regression within each panel.
+Problem 1B: Equal 100% stacked heights do not mean equal counts; each drv bar is normalized within that group.
+Problem 1C: Selected diamonds with carat <= 2.00: 52051 retained, 1889 excluded.
+Fine 0.01-carat bins reveal sharp spikes around specific reported carat values that wider bins conceal.
+
+Problem 2: 82 site records downloaded; 82 retained after cleaning.
+Problem 2: 0 extra identical-coordinate rows retained, not deduplicated.
+Projected CRS: EPSG:26916, NAD83/UTM zone 16N, linear units: metres.
+Combined 500 m buffer: 64.311 km2; combined 1000 m buffer: 250.109 km2.
+Overlapping buffers are counted once and are NOT clipped at the city boundary.
+These measures show planar proximity, not the share of residents with access.
+
+Problem 3: 77 community areas; 82 sites assigned to exactly one; 0 unassigned.
+Most libraries by count: 3 each in PORTAGE PARK, HUMBOLDT PARK, AUSTIN, NEAR WEST SIDE, NEW CITY.
+Highest area density: DOUGLAS (0.468 libraries per km2).
+16 of 77 community areas have zero libraries.
+Area density divides each community area's library count by its polygon area.
+Rankings change when area is considered: small areas can have high density despite modest counts, and large areas can have several libraries but low density.
+Community-area density is not population-based library availability.
+Sources downloaded: libraries 2026-10-31; community-area boundaries 2026-10-31.
+Chicago portal terms of use apply; publication dates are not proof of current operating status.
